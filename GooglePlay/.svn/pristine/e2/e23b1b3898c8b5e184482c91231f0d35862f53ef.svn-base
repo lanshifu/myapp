@@ -1,0 +1,37 @@
+package com.itheima.googleplay.protocol;
+
+public class HomeProtocol {
+	public void load(int index) {
+		// ÇëÇó·þÎñÆ÷
+		String json = loadLocal(index);
+		if (json == null) {
+			json = loadServer();
+			if (json != null) {
+				saveLocal(json, index);
+			}
+		}
+		if(json!=null){
+			paserJson(json);
+		}
+	}
+
+	private void paserJson(String json) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void saveLocal(String json, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private String loadServer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private String loadLocal(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

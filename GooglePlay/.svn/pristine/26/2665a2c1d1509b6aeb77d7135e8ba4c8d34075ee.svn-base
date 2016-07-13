@@ -1,0 +1,37 @@
+package com.itheima.googleplay.fragment;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+public class HomeFragment extends Fragment {
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		FrameLayout frameLayout=new FrameLayout(getActivity());
+		init();  //  在FrameLayout中 添加4种不同的界面
+		showPage();//  根据不同的状态显示不同的界面
+		show();// 根据服务器的数据 切换状态
+		
+		return frameLayout;
+	}
+	// 在FrameLayout中 添加4种不同的界面
+	private void init() {
+		
+	}
+	//根据不同的状态显示不同的界面
+	private void showPage() {
+		
+	}
+
+	//根据服务器的数据 切换状态
+	private void show() {
+		
+	}
+
+	
+}

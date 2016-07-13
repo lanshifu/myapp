@@ -1,0 +1,19 @@
+package com.itheima.googleplay.adapter;
+
+import java.util.List;
+
+import com.itheima.googleplay.domain.AppInfo;
+import com.itheima.googleplay.holder.BaseHolder;
+import com.itheima.googleplay.holder.ListBaseHolder;
+
+public class ListBaseAdapter extends DefaultAdapter<AppInfo> {
+	public ListBaseAdapter(List<AppInfo> datas) {
+		super(datas);
+	}
+
+	@Override
+	protected BaseHolder<AppInfo> getHolder() {
+		return new ListBaseHolder();
+	}
+	
+}

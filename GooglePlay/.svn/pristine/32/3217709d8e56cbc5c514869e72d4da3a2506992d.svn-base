@@ -1,0 +1,62 @@
+package com.itheima.googleplay.adapter;
+
+import java.util.List;
+
+import com.itheima.googleplay.holder.BaseHolder;
+import com.itheima.googleplay.holder.MoreHolder;
+
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+
+public abstract class DefaultAdapter<Data> extends BaseAdapter {
+	protected List<Data> datas;
+	
+	public List<Data> getDatas() {
+		return datas;
+	}
+	public void setDatas(List<Data> datas) {
+		this.datas = datas;
+	}
+	public DefaultAdapter(List<Data> datas){
+		this.datas=datas;
+	}
+	
+	@Override
+	public int getCount() {
+		return datas.size()+1;  //最后的一个条目 就是加载更多的条目
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return datas.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	public View getView(int position, View convertView, ViewGroup parent) {
+		BaseHolder holder;
+		if(position==datas.size()){  // 如果位置为最后一个位置 就显示MoreHolder
+			holder=getMoreHolder();
+			return holder.getContentView();
+		}
+	
+		if(convertView==null){
+			holder=getHolder();  // 普通条目的holder 
+		}else{
+			holder=(BaseHolder) convertView.getTag();  //复用
+		}
+		Data info=datas.get(position);
+		holder.setData(info);
+		
+		return holder.getContentView();
+	}
+	private BaseHolder getMoreHolder() {
+		return new MoreHolder();
+	}
+	protected abstract BaseHolder<Data> getHolder(); 
+
+}

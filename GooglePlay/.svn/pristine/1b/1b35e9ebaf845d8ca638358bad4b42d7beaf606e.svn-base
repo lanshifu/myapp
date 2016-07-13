@@ -1,0 +1,25 @@
+package com.itheima.googleplay.fragment;
+
+import android.view.View;
+import android.widget.TextView;
+
+import com.itheima.googleplay.domain.CategoryInfo;
+import com.itheima.googleplay.holder.BaseHolder;
+import com.itheima.googleplay.tools.UiUtils;
+
+public class CategoryTitleHolder extends BaseHolder<CategoryInfo> {
+
+	private TextView tv;
+
+	@Override
+	public View initView() {
+		tv = new TextView(UiUtils.getContext());
+		return tv;
+	}
+
+	@Override
+	public void refreshView(CategoryInfo data) {
+		tv.setText(data.getTitle());
+	}
+
+}

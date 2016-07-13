@@ -1,0 +1,72 @@
+package com.itheima.googleplay.protocol;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+
+import org.apache.http.client.HttpClient;
+
+import com.itheima.googleplay.http.HttpHelper;
+import com.itheima.googleplay.http.HttpHelper.HttpResult;
+import com.itheima.googleplay.tools.FileUtils;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.ResponseStream;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+import com.lidroid.xutils.util.IOUtils;
+
+public class HomeProtocol {
+	public void load(int index) {
+		// 请求服务器
+		String json = loadLocal(index);
+		if (json == null) {
+			json = loadServer(index);
+			if (json != null) {
+				saveLocal(json, index);
+			}
+		}
+		if(json!=null){
+			paserJson(json);
+		}
+	}
+	//  1 把整个json文件写到一个本地文件中  **
+	// 2  把每条数据都摘出来存到数据库中 
+	private void paserJson(String json) {
+	
+	}
+
+	private void saveLocal(String json, int index) {
+		
+		BufferedWriter bw = null;
+		try {
+			File dir=FileUtils.getCacheDir();
+			//在第一行写一个过期时间 
+			File file = new File(dir, "home_" + index); // /mnt/sdcard/googlePlay/cache/home_0
+			FileWriter fw = new FileWriter(file);
+			 bw = new BufferedWriter(fw);
+			bw.write(System.currentTimeMillis() + 1000 * 100 + "");
+			bw.newLine();// 换行
+			bw.write(json);// 把整个json文件保存起来
+			bw.flush();
+			bw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			IOUtils.closeQuietly(bw);
+		}
+	}
+
+	private String loadServer(int index) {
+		HttpResult httpResult = HttpHelper.get(HttpHelper.URL+"home"+"?index="+index); // http://127.0.0.1:8090/home?index=index;
+		String json = httpResult.getString();	
+		System.out.println(json);
+		return json;
+	}
+
+	private String loadLocal(int index) {
+		//  如果发现文件已经过期了 就不要再去复用缓存了
+		return null;
+	}
+}

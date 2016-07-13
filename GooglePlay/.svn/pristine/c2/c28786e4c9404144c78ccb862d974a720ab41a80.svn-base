@@ -1,0 +1,26 @@
+package com.itheima.googleplay.holder;
+
+import android.view.View;
+import android.widget.TextView;
+
+import com.itheima.googleplay.domain.AppInfo;
+import com.itheima.googleplay.tools.UiUtils;
+
+public class DetailInfoHolder extends BaseHolder<AppInfo> {
+	private TextView tv;
+
+	/***
+	 * 实例化控件和布局
+	 */
+	@Override
+	public View initView() {
+		tv = new TextView(UiUtils.getContext());
+		return tv;
+	}
+
+	@Override
+	public void refreshView(AppInfo data) {
+		tv.setText(data.getName());
+	}
+
+}

@@ -1,0 +1,21 @@
+package com.itheima.googleplay.view;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.FrameLayout;
+
+public class RatioLayout extends FrameLayout {
+	// 按照宽高比例去显示 
+	public RatioLayout(Context context) {
+		super(context);
+	}
+
+	public RatioLayout(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+	}
+
+	public RatioLayout(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+	
+}

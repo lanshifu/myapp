@@ -1,0 +1,61 @@
+package com.itheima.googleplay.view;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class Flowlayout extends ViewGroup {
+
+	public Flowlayout(Context context) {
+		super(context);
+	}
+	public Flowlayout(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+	}
+
+
+	public Flowlayout(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+	// 测量 当前控件Flowlayout 
+	// 父类是有义务测量每个孩子的 
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		// TODO Auto-generated method stub
+//		MeasureSpec.EXACTLY;
+//		MeasureSpec.AT_MOST;
+//		MeasureSpec.UNSPECIFIED;
+		int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+		int heightMode = MeasureSpec.getMode(heightMeasureSpec);  //  获取当前父容器(Flowlayout)的模式
+		int width = MeasureSpec.getSize(widthMeasureSpec);
+		int height = MeasureSpec.getSize(heightMeasureSpec); // 获取到宽和高 
+		int childeWidthMode;
+		int childeHeightMode;
+	//  为了测量每个孩子 需要指定每个孩子测量规则 	
+		childeWidthMode=widthMode==MeasureSpec.EXACTLY?MeasureSpec.AT_MOST:widthMode;
+		childeHeightMode=heightMode==MeasureSpec.EXACTLY?MeasureSpec.AT_MOST:heightMode;
+		
+		int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(childeWidthMode,  width);
+		int childHeightMeasureSpec=MeasureSpec.makeMeasureSpec(childeHeightMode,  height);
+		for(int i=0;i<getChildCount();i++)	{
+			View child=getChildAt(i);
+			// 测量每个孩子
+			child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+		
+		}
+		
+		
+		
+		 setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
+	                getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
+	}
+	
+
+	// 分配每个孩子的位置 
+	@Override
+	protected void onLayout(boolean changed, int l, int t, int r, int b) {
+
+	}
+
+}
